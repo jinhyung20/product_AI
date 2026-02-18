@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>김진형 — 연구실적 성과 자료</title>
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --surface: #ffffff;
+      --surface2: #eef1f7;
+      --border: #dde2ec;
+      --text: #1a202c;
+      --text-sub: #4a5568;
+      --accent: #2a7ae2;
+      --accent2: #1a56b0;
+      --teal: #0d9488;
+      --teal-light: #e6faf8;
+      --tag-bg: #e8f0fe;
+      --tag-text: #1a56b0;
+      --card-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      --timeline-dot: #2a7ae2;
+      --badge-bg: #dbeafe;
+      --badge-text: #1d4ed8;
+    }
+    body.dark {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface2: #162032;
+      --border: #2d3d55;
+      --text: #e2e8f0;
+      --text-sub: #94a3b8;
+      --accent: #60a5fa;
+      --accent2: #93c5fd;
+      --teal: #2dd4bf;
+      --teal-light: #0f2a28;
+      --tag-bg: #1e3a5f;
+      --tag-text: #93c5fd;
+      --card-shadow: 0 2px 16px rgba(0,0,0,0.35);
+      --timeline-dot: #60a5fa;
+      --badge-bg: #1e3a5f;
+      --badge-text: #93c5fd;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+      line-height: 1.7;
+    }
+
+    /* ── Theme toggle ── */
+    #theme-toggle {
+      position: fixed;
+      top: 18px;
+      right: 20px;
+      z-index: 999;
+      padding: 8px 18px;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: var(--card-shadow);
+    }
+    #theme-toggle:hover { background: var(--surface2); }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #0f4c81 0%, #0d9488 100%);
+      color: #fff;
+      padding: 80px 24px 60px;
+      text-align: center;
+    }
+    body.dark .hero {
+      background: linear-gradient(135deg, #0c2a4a 0%, #0a4038 100%);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 20px;
+      padding: 4px 16px;
+      font-size: 13px;
+      margin-bottom: 20px;
+      letter-spacing: 0.05em;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      opacity: 0.85;
+      margin-bottom: 30px;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat .val {
+      font-size: 2.2rem;
+      font-weight: 800;
+      display: block;
+    }
+    .hero-stat .lbl { font-size: 0.85rem; opacity: 0.8; }
+    .hero-contact {
+      margin-top: 28px;
+      font-size: 0.9rem;
+      opacity: 0.75;
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    /* ── Section ── */
+    .section { margin-top: 56px; }
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      border-left: 4px solid var(--accent);
+      padding-left: 14px;
+      margin-bottom: 28px;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      box-shadow: var(--card-shadow);
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .card + .card { margin-top: 18px; }
+
+    /* ── Timeline ── */
+    .timeline {
+      position: relative;
+      padding-left: 36px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: var(--border);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 28px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -30px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--timeline-dot);
+      border: 2px solid var(--bg);
+    }
+    .timeline-date {
+      font-size: 0.8rem;
+      color: var(--teal);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .timeline-title {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 2px;
+    }
+    .timeline-desc {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+    }
+
+    /* ── Tech stack tags ── */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border-radius: 8px;
+      padding: 4px 12px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    /* ── KPI grid ── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+    .kpi-card {
+      background: var(--teal-light);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 20px;
+      text-align: center;
+      transition: background 0.3s;
+    }
+    .kpi-val {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--teal);
+      display: block;
+    }
+    .kpi-lbl {
+      font-size: 0.88rem;
+      color: var(--text-sub);
+      margin-top: 4px;
+    }
+    .kpi-sub {
+      font-size: 0.78rem;
+      color: var(--text-sub);
+      margin-top: 2px;
+    }
+
+    /* ── Project cards ── */
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .project-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    .project-period {
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+    .project-desc {
+      color: var(--text-sub);
+      font-size: 0.92rem;
+      margin-bottom: 12px;
+    }
+
+    /* ── Workflow steps ── */
+    .workflow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      margin-top: 14px;
+    }
+    .workflow-step {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .workflow-arrow { color: var(--text-sub); font-size: 0.9rem; }
+
+    /* ── Before/After ── */
+    .before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 14px;
+    }
+    .ba-box {
+      border-radius: 10px;
+      padding: 18px;
+      text-align: center;
+    }
+    .ba-before { background: #fee2e2; border: 1px solid #fca5a5; }
+    .ba-after  { background: #d1fae5; border: 1px solid #6ee7b7; }
+    body.dark .ba-before { background: #3b1010; border-color: #7f1d1d; }
+    body.dark .ba-after  { background: #0a2d1e; border-color: #065f46; }
+    .ba-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .ba-before .ba-label { color: #dc2626; }
+    .ba-after .ba-label  { color: #059669; }
+    body.dark .ba-before .ba-label { color: #f87171; }
+    body.dark .ba-after .ba-label  { color: #34d399; }
+    .ba-val { font-size: 2rem; font-weight: 800; }
+    .ba-before .ba-val { color: #dc2626; }
+    .ba-after .ba-val  { color: #059669; }
+    body.dark .ba-before .ba-val { color: #f87171; }
+    body.dark .ba-after .ba-val  { color: #34d399; }
+    .ba-desc { font-size: 0.82rem; color: var(--text-sub); margin-top: 4px; }
+
+    /* ── Skills grid ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px;
+    }
+    .skill-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .skill-list {
+      font-size: 0.88rem;
+      color: var(--text-sub);
+      line-height: 2;
+    }
+
+    /* ── Points ── */
+    .points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .points li {
+      display: flex;
+      gap: 10px;
+      font-size: 0.92rem;
+    }
+    .points li::before {
+      content: '→';
+      color: var(--teal);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ── Closing ── */
+    .closing {
+      text-align: center;
+      padding: 60px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-top: 56px;
+    }
+    .closing h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    /* ── Info list ── */
+    .info-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .info-list li { font-size: 0.92rem; color: var(--text-sub); }
+    .info-list strong { color: var(--text); }
+
+    @media (max-width: 600px) {
+      .hero-stats { gap: 20px; }
+      .before-after { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<button id="theme-toggle">🌙 Dark Mode</button>
+
+<!-- ───── Hero ───── -->
+<div class="hero">
+  <div class="hero-badge">이직 면접 PT 자료</div>
+  <h1>김진형</h1>
+  <p class="hero-sub">Bioinformatics &nbsp;·&nbsp; Genomics &nbsp;·&nbsp; Clinical Pipeline</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="val">70%</span><span class="lbl">재검률 감소</span></div>
+    <div class="hero-stat"><span class="val">8천만원</span><span class="lbl">연간 비용 절감</span></div>
+    <div class="hero-stat"><span class="val">10,000건+</span><span class="lbl">연간 임상 분석</span></div>
+    <div class="hero-stat"><span class="val">3년 9개월</span><span class="lbl">현직 경력</span></div>
+  </div>
+  <p class="hero-contact">wnqn56@naver.com &nbsp;|&nbsp; 010-8300-0854</p>
+</div>
+
+<div class="container">
+
+  <!-- ───── 경력 타임라인 ───── -->
+  <div class="section">
+    <h2 class="section-title">경력 타임라인</h2>
+    <div class="card">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">2021.09 ~ 2022.02</div>
+          <div class="timeline-title">바이오 데이터 엔지니어 수료</div>
+          <div class="timeline-desc">바이오인포매틱스 전문 과정 이수</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2022.03</div>
+          <div class="timeline-title">한림대학교 생명과학과 졸업</div>
+          <div class="timeline-desc">생명과학 전공 학사 학위 취득</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2022.04</div>
+          <div class="timeline-title">랩지노믹스 입사</div>
+          <div class="timeline-desc">바이오인포매틱스 연구원으로 입사</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2022 ~ 2024</div>
+          <div class="timeline-title">NIPT 파이프라인 고도화</div>
+          <div class="timeline-desc">재검률 70% 감소 · K-means Reference 선택 알고리즘 설계·구현</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2024.06</div>
+          <div class="timeline-title">Microarray 플랫폼 구축</div>
+          <div class="timeline-desc">파이프라인 · DB · LIMS · 결과지 전체 프로세스 설계</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">현재</div>
+          <div class="timeline-title">이직 준비 (3년 9개월 경력)</div>
+          <div class="timeline-desc">새로운 도전을 위한 이직 준비 중</div>
+        </div>
+      </div>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">R</span>
+        <span class="tag">Linux</span>
+        <span class="tag">WGS</span>
+        <span class="tag">K-means</span>
+        <span class="tag">CNV Detection</span>
+        <span class="tag">Microarray</span>
+        <span class="tag">LIMS</span>
+        <span class="tag">SOP</span>
+        <span class="tag">Docker</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── 주요 업무 개요 ───── -->
+  <div class="section">
+    <h2 class="section-title">주요 업무 개요</h2>
+    <div class="card">
+      <div class="project-header">
+        <div class="project-title">NIPT 파이프라인 고도화 및 운영</div>
+        <span class="project-period">2022.04 ~ 현재</span>
+      </div>
+      <p class="project-desc">cfDNA 기반 WGS · Reference 재구축 · 미세결실 확대</p>
+      <div class="kpi-grid">
+        <div class="kpi-card"><span class="kpi-val">10,000+</span><div class="kpi-lbl">연간 임상 데이터 분석</div></div>
+        <div class="kpi-card"><span class="kpi-val">70%</span><div class="kpi-lbl">재검률 감소</div></div>
+        <div class="kpi-card"><span class="kpi-val">8천만원</span><div class="kpi-lbl">연간 비용 절감</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="project-header">
+        <div class="project-title">신생아 대사이상 유전질환 파이프라인</div>
+        <span class="project-period">2022.04 ~ 현재</span>
+      </div>
+      <p class="project-desc">Targeted Seq · 성능검증 · SOP 작성</p>
+    </div>
+    <div class="card">
+      <div class="project-header">
+        <div class="project-title">Microarray 분석 플랫폼 구축</div>
+        <span class="project-period">2024.06 ~ 2025.03</span>
+      </div>
+      <p class="project-desc">파이프라인 · DB · LIMS · 결과지 설계</p>
+    </div>
+  </div>
+
+  <!-- ───── NIPT 개념 및 Workflow ───── -->
+  <div class="section">
+    <h2 class="section-title">NIPT 분석 파이프라인 — 개념 및 Workflow</h2>
+    <div class="card">
+      <div class="project-title" style="margin-bottom:16px;">NIPT 분석 원리</div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">Step 1</div>
+          <div class="timeline-title">산모 혈액 채취</div>
+          <div class="timeline-desc">말초혈 10ml</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Step 2</div>
+          <div class="timeline-title">cfDNA 추출</div>
+          <div class="timeline-desc">태아 유래 cell-free DNA (fetal fraction 5~20%)</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Step 3</div>
+          <div class="timeline-title">Low-pass WGS</div>
+          <div class="timeline-desc">0.2X~1X coverage · 전체 게놈 shallow sequencing</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Step 4</div>
+          <div class="timeline-title">Coverage 분석</div>
+          <div class="timeline-desc">염색체별 read count 비교 → 이수성/미세결실 판별</div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px; background:var(--surface2);">
+        <p style="font-size:0.88rem; color:var(--text-sub);">
+          <strong style="color:var(--teal);">핵심 원리:</strong>
+          정상 태아는 각 염색체 read 비율이 일정합니다. 이수성 발생 시 해당 염색체의 read 비율이 통계적으로 유의하게 증가합니다.
+        </p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px;">
+      <div class="project-title" style="margin-bottom:16px;">MomGuard V3 Pipeline Workflow</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; font-size:0.85rem;">
+        <div>
+          <div style="font-weight:700; color:var(--accent); margin-bottom:8px; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.06em;">전처리</div>
+          <div class="workflow" style="flex-direction:column; align-items:flex-start; gap:4px;">
+            <span class="workflow-step">FASTQ Input</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">Quality Trimming (fastp)</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">BWA-mem2 Alignment (HG19)</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">Sort BAM</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">Mark Duplicates (GATK4 Spark)</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">Dup Remove &amp; Region Filter</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:700; color:var(--accent); margin-bottom:8px; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.06em;">분석</div>
+          <div class="workflow" style="flex-direction:column; align-items:flex-start; gap:4px;">
+            <span class="workflow-step">50kb Window Read Count</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">GC Correction (Loess)</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">SeqFF 계산 (Fetal Fraction)</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">NPZ 변환</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">Wisecondor v1 (z-score)</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">WisecondorX / CopywriteR</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:700; color:var(--accent); margin-bottom:8px; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.06em;">결과</div>
+          <div class="workflow" style="flex-direction:column; align-items:flex-start; gap:4px;">
+            <span class="workflow-step">미세결실 판정 (117종)</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">Aneuploidy 분석 (특허)</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">V2 / V3 Metastat 생성</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">최종 결과 리포트</span>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px; background:var(--surface2);">
+        <p style="font-size:0.83rem; color:var(--text-sub);">
+          <strong style="color:var(--teal);">도구:</strong> fastp · BWA-mem2 · samtools · GATK4 · bedtools · Wisecondor · CopywriteR · Python/R<br>
+          <strong style="color:var(--teal);">핵심 기술:</strong> K-means Reference 선택 · GC bias 보정 · SeqFF 태아분율 · z-score 이수성 판정 · CNV segmentation
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── NIPT 핵심 성과 ───── -->
+  <div class="section">
+    <h2 class="section-title">NIPT 파이프라인 고도화 — 핵심 성과</h2>
+    <div class="card">
+      <div class="kpi-grid" style="margin-bottom:24px;">
+        <div class="kpi-card"><span class="kpi-val">70%</span><div class="kpi-lbl">재검률 감소</div></div>
+        <div class="kpi-card"><span class="kpi-val">8천만원</span><div class="kpi-lbl">연간 비용 절감</div></div>
+        <div class="kpi-card"><span class="kpi-val">117종</span><div class="kpi-lbl">미세결실 항목 확대</div><div class="kpi-sub">(기존 6종)</div></div>
+      </div>
+      <ul class="info-list">
+        <li><strong>기간:</strong> 2022.04 ~ 현재 (3년 9개월)</li>
+        <li><strong>규모:</strong> 연간 약 10,000건 임상 데이터</li>
+        <li><strong>기술:</strong> Python, R, Linux, WGS, K-means, CNV</li>
+      </ul>
+      <div style="margin-top:20px; display:flex; flex-direction:column; gap:14px;">
+        <div class="card" style="background:var(--surface2);">
+          <div style="font-weight:700; margin-bottom:6px;">Reference 재구축</div>
+          <p style="font-size:0.9rem; color:var(--text-sub);">K-means 클러스터링 기반 동적 Reference 선택 알고리즘 설계·구현으로 Grey zone 획기적 감소</p>
+        </div>
+        <div class="card" style="background:var(--surface2);">
+          <div style="font-weight:700; margin-bottom:6px;">미세결실 항목 확대</div>
+          <p style="font-size:0.9rem; color:var(--text-sub);">OMIM, Orphanet DB 기반 117개 미세결실 항목 선정, 질병청 신고 완료</p>
+        </div>
+        <div class="card" style="background:var(--surface2);">
+          <div style="font-weight:700; margin-bottom:6px;">CNV 알고리즘 개선</div>
+          <p style="font-size:0.9rem; color:var(--text-sub);">분석적 민감도·특이도·정확도·반복성 성능검증 수행, 유전자평가원 실사 통과</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── Reference Setting ───── -->
+  <div class="section">
+    <h2 class="section-title">NIPT ① Reference Setting 작업</h2>
+    <div class="card">
+      <div class="project-title" style="margin-bottom:16px;">분석 Workflow</div>
+      <div class="workflow">
+        <span class="workflow-step">1X Coverage Normal 샘플 선별</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step">QC PASS 필터링</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step">유사도 분석 (PCA 차원 축소)</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step">K-means Clustering</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step">Euclidean Distance 기반 Reference 샘플 선별</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step">비교 염색체군 결정 (CV Value)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── 미세결실 항목 확대 ───── -->
+  <div class="section">
+    <h2 class="section-title">NIPT ② 미세결실 분석 항목 확대</h2>
+    <div class="card">
+      <div class="before-after">
+        <div class="ba-box ba-before">
+          <div class="ba-label">BEFORE</div>
+          <div class="ba-val">6종</div>
+          <div class="ba-desc">미세결실 항목</div>
+        </div>
+        <div class="ba-box ba-after">
+          <div class="ba-label">AFTER</div>
+          <div class="ba-val">117종</div>
+          <div class="ba-desc">미세결실 항목</div>
+        </div>
+      </div>
+      <div style="margin-top:20px;">
+        <div style="font-weight:700; margin-bottom:10px;">수행 업무</div>
+        <ul class="points">
+          <li>OMIM/Orphanet DB 기반 항목 선정</li>
+          <li>질병청 신고 완료</li>
+          <li>CNV 탐지 알고리즘 개선 수행</li>
+        </ul>
+      </div>
+      <div style="margin-top:20px;">
+        <div style="font-weight:700; margin-bottom:10px;">성능검증 결과</div>
+        <div class="tags">
+          <span class="tag">분석적 민감도</span>
+          <span class="tag">특이도</span>
+          <span class="tag">정확도</span>
+          <span class="tag">반복성</span>
+        </div>
+        <p style="margin-top:12px; font-size:0.88rem; color:var(--teal); font-weight:600;">
+          유전자평가원 실사 통과 완료 &nbsp;·&nbsp; 질병청 항목 등록 완료
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── GC Correction ───── -->
+  <div class="section">
+    <h2 class="section-title">NIPT ③ GC Correction 성능 검토</h2>
+    <div class="card">
+      <div style="font-weight:700; margin-bottom:12px;">분석 개요</div>
+      <ul class="info-list">
+        <li><strong>테스트:</strong> 총 105 sample (고위험군 제외)</li>
+        <li><strong>방법:</strong> 50kb bin 단위 raw read → GC% 별 Loess regression</li>
+        <li><strong>평가:</strong> Differential slope 값 비교 (Average, Max slope)</li>
+      </ul>
+      <div class="card" style="margin-top:16px; background:var(--teal-light);">
+        <p style="font-size:0.9rem; color:var(--text-sub);">
+          <strong style="color:var(--teal);">결론:</strong>
+          성염색체 제외(Autosome only) 방법이 우수. 변동성이 적은 방법 C 채택 → z-score Grey zone 감소 효과
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── 신생아 대사이상 ───── -->
+  <div class="section">
+    <h2 class="section-title">신생아 대사이상 유전질환 분석 파이프라인</h2>
+    <div class="card">
+      <ul class="info-list" style="margin-bottom:20px;">
+        <li><strong>기간:</strong> 2022.04 ~ 현재 (3년 9개월)</li>
+        <li><strong>규모:</strong> 연간 약 2,000건 이상</li>
+        <li><strong>분석:</strong> Targeted Sequencing 데이터</li>
+      </ul>
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div class="card" style="background:var(--surface2);">
+          <div style="display:flex; gap:12px; align-items:flex-start;">
+            <span style="background:var(--accent); color:#fff; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.85rem; flex-shrink:0;">1</span>
+            <div>
+              <div style="font-weight:700;">파이프라인 트러블슈팅</div>
+              <div style="font-size:0.88rem; color:var(--text-sub); margin-top:4px;">파이프라인 작동 관련 이슈 대응 및 해결</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="background:var(--surface2);">
+          <div style="display:flex; gap:12px; align-items:flex-start;">
+            <span style="background:var(--accent); color:#fff; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.85rem; flex-shrink:0;">2</span>
+            <div>
+              <div style="font-weight:700;">SOP 문서 작성</div>
+              <div style="font-size:0.88rem; color:var(--text-sub); margin-top:4px;">유전자평가원 실사 대비 표준운영절차서 작성</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="background:var(--surface2);">
+          <div style="display:flex; gap:12px; align-items:flex-start;">
+            <span style="background:var(--accent); color:#fff; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.85rem; flex-shrink:0;">3</span>
+            <div>
+              <div style="font-weight:700;">성능평가 수행</div>
+              <div style="font-size:0.88rem; color:var(--text-sub); margin-top:4px;">민감도, 특이도, 반복성, 재현성, 정확도 검증</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px;">
+      <div class="project-title" style="margin-bottom:16px;">IMSplus Pipeline Workflow</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; font-size:0.85rem;">
+        <div>
+          <div style="font-weight:700; color:var(--accent); margin-bottom:8px; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.06em;">정렬</div>
+          <div class="workflow" style="flex-direction:column; align-items:flex-start; gap:4px;">
+            <span class="workflow-step">FASTQ Input</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">Trimmomatic</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">BWA-mem2 (Standard Ref)</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">BWA-mem2 (Masked Ref)</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">Non-Pseudo / Pseudo 추출</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">BAM Merge &amp; Sort</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:700; color:var(--accent); margin-bottom:8px; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.06em;">후처리 / 변이검출</div>
+          <div class="workflow" style="flex-direction:column; align-items:flex-start; gap:4px;">
+            <span class="workflow-step">Target BAM</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">Indel Realign</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">Primer Clip</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">Coverage QC</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">HaplotypeCaller</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">VarDict → Combine Var.</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:700; color:var(--accent); margin-bottom:8px; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.06em;">어노테이션</div>
+          <div class="workflow" style="flex-direction:column; align-items:flex-start; gap:4px;">
+            <span class="workflow-step">SnpEff</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">dbSNP / dbNSFP</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">KGGSeq</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">ClinVar</span>
+            <span class="workflow-arrow">↓</span>
+            <span class="workflow-step">GBA Filter &amp; Report</span>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px; background:var(--surface2);">
+        <p style="font-size:0.83rem; color:var(--text-sub);">
+          <strong style="color:var(--teal);">도구:</strong> Trimmomatic · BWA-mem2 · samtools · GATK3/4 · VarDict · BAMClipper · SnpEff · ClinVar · KGGSeq<br>
+          <strong style="color:var(--teal);">Pseudogene 처리:</strong> GBA 등 pseudogene mismapping 방지를 위해 Standard/Masked Ref 각각 매핑 후 영역 분리·병합
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── Microarray ───── -->
+  <div class="section">
+    <h2 class="section-title">Microarray 분석 플랫폼 구축</h2>
+    <div class="card">
+      <p style="color:var(--text-sub); font-size:0.9rem; margin-bottom:20px;">
+        기간: 2024.06 ~ 2025.03 (9개월) &nbsp;|&nbsp; 범위: 파이프라인 · DB · LIMS · 결과지 설계 등 전체 프로세스
+      </p>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-title">파이프라인 구축</div>
+          <div class="skill-list">리눅스 기반 자동화 분석<br>(Genotyping)</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-title">DB Schema 설계</div>
+          <div class="skill-list">분석 결과 데이터 구조<br>설계 및 구축</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-title">LIMS 연동</div>
+          <div class="skill-list">실험실 정보 관리 시스템<br>연동 체계 확립</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-title">결과지 설계</div>
+          <div class="skill-list">임상 보고서 형식 설계<br>및 자동 생성</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── 핵심 역량 ───── -->
+  <div class="section">
+    <h2 class="section-title">핵심 역량 및 강점</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-title">Genomics Analysis</div>
+        <div class="skill-list">
+          WGS (0.2X/1X) · Targeted Seq<br>
+          CNV Detection · Microarray<br>
+          cfDNA 분석 · NIPT
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">Pipeline Development</div>
+        <div class="skill-list">
+          Python · R · Linux<br>
+          Automation · Docker<br>
+          DB Schema · LIMS 연동
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">Quality &amp; Compliance</div>
+        <div class="skill-list">
+          SOP 작성 · 성능검증<br>
+          유전자평가원 실사 대응<br>
+          질병청 신고 절차
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:18px;">
+      <div style="font-weight:700; margin-bottom:14px; color:var(--teal);">차별화 포인트</div>
+      <ul class="points">
+        <li>임상 현장에서 실제 운영되는 분석 파이프라인 개발·운영 경험 (연간 10,000+건)</li>
+        <li>분석 알고리즘 설계부터 규제(질병청/유전자평가원) 대응까지 End-to-End 수행</li>
+        <li>프로젝트 전체 프로세스(파이프라인·DB·LIMS·결과지)를 독립적으로 설계·구축한 경험</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ───── 마무리 ───── -->
+  <div class="closing">
+    <h2>감사합니다</h2>
+    <p style="font-size:1.1rem; font-weight:600; margin-bottom:8px;">김진형</p>
+    <p style="color:var(--text-sub);">wnqn56@naver.com &nbsp;|&nbsp; 010-8300-0854</p>
+  </div>
+
+</div>
+
+<script>
+  const toggle = document.getElementById('theme-toggle');
+
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark');
+    toggle.textContent = '☀️ Light Mode';
+  }
+
+  toggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    const isDark = document.body.classList.contains('dark');
+    toggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+</script>
+</body>
+</html>
